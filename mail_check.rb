@@ -17,7 +17,7 @@ begin
   # Check for new mail
   updater.process
 rescue Exception => e
-  # As this is meant to run in the backgroup, Put this all in a big exception check
+  # As this is meant to run in the background, wrap this all in an exception check
   puts e.message
   puts e.backtrace.join("\n")
 end
