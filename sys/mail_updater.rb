@@ -1,11 +1,10 @@
 require_relative 'event_emitter'
 
-# Public: Register multiple sources or email and check each of them
+# Public: Register multiple sources for email and check each of them
 # for new mail. Send messages to registered services if there are
 # new messages.
 #
 # Examples
-#
 #   updater = MailUpdater.new(:logging => true)
 #   updater.add_mail_source OfflineImapSource.new
 #   updater.process
@@ -28,7 +27,7 @@ class MailUpdater < EventEmitter
     # Call each source and collect the messages
     messages = @sources.inject([]){ |a, e| e.call }.flatten
 
-    # Itgnore list - this should be driven by config
+    # Ignore list - this should be driven by config
     messages = messages.select{ |m| m !~ /(all mail|important|trash|sent|drafts|arcana)/i }
 
     after_check_events messages
