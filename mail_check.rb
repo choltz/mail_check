@@ -1,11 +1,8 @@
-require_relative 'sys/mail_updater'
-require_relative 'actions/offlineimap'
-require_relative 'actions/mu_index'
-require_relative 'actions/play_sound'
-require_relative 'actions/show_notifier'
-require_relative 'actions/message_logger'
+require_relative "sys/load_app"
 
 begin
+  LoadApp.new(env: "dev")
+
   # Create a mail updated and add a mail source
   updater = MailUpdater.new
   updater.add_mail_source  Offlineimap.new

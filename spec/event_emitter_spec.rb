@@ -1,10 +1,10 @@
-require_relative "../sys/event_emitter"
+require_relative "spec_helper"
 
 describe EventEmitter do
   before(:each) do
     @listener1 = mock("listener1")
     @listener2 = mock("listener2")
-    @emitter  = EventEmitter.new( :logging => true )
+    @emitter   = EventEmitter.new( :logging => true )
   end
 
   it "should add listeners" do

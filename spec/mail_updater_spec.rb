@@ -1,7 +1,4 @@
-require_relative "../sys/event_emitter"
-require_relative "../sys/mail_updater"
-require_relative "test_files/test_mail_source"
-require_relative "test_files/test_listener"
+require_relative "spec_helper"
 
 describe MailUpdater do
   let(:updater)       { MailUpdater.new :logging => true }
