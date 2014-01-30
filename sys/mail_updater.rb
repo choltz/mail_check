@@ -9,7 +9,11 @@ require_relative 'event_emitter'
 #   updater.add_mail_source OfflineImapSource.new
 #   updater.process
 class MailUpdater < EventEmitter
-  attr_accessor  :sources
+  # Note: it would be better to compose with an event emitter class than
+  # to inherit from it...
+
+  attr_accessor :sources
+  attr_accessor :ignore_pattern
 
   # Public: constructor
   def initialize(options = {})
@@ -27,8 +31,8 @@ class MailUpdater < EventEmitter
     # Call each source and collect the messages
     messages = @sources.inject([]){ |a, e| e.call }.flatten
 
-    # Ignore list - this should be driven by config
-    messages = messages.select{ |m| m !~ /(all mail|important|trash|sent|drafts|arcana)/i }
+    # Reduce the new message list by filtering out by a regex pattern
+    messages = messages.select{ |m| m !~ @ignore_pattern }
 
     after_check_events messages
   rescue Exception => e

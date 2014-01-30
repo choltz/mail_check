@@ -48,4 +48,11 @@ describe MailUpdater do
     updater.history.length.should eq(0)
     test_listener.has_been_called.should eq(false)
   end
+
+  it "processes new messages" do
+  end
+
+  it "filters out messages that match the pattern specicied" do
+  end
+
 end
