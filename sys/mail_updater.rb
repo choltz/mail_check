@@ -19,6 +19,7 @@ class MailUpdater < EventEmitter
   # Public: constructor
   def initialize(options = {})
     @sources = []
+    @logger  = NoLogger.new
     super(options)
   end
 
