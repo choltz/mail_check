@@ -14,6 +14,7 @@ class MailUpdater < EventEmitter
 
   attr_accessor :sources
   attr_accessor :ignore_pattern
+  attr_accessor :logger
 
   # Public: constructor
   def initialize(options = {})
@@ -36,9 +37,8 @@ class MailUpdater < EventEmitter
 
     after_check_events messages
   rescue Exception => e
-    puts e.message
-    puts ''
-    puts e.backtrace
+    @logger.error e.message
+    @logger.error e.backtrace.join("\n")
   end
 
   private

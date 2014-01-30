@@ -5,6 +5,7 @@ begin
 
   # Create a mail updated and add a mail source
   updater = MailUpdater.new
+  updater.logger = Logger.new("log/message.log")
   updater.add_mail_source  Offlineimap.new
   updater.ignore_pattern = /(all mail|important|trash|sent|drafts|arcana)/i
 
