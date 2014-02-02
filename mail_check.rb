@@ -1,4 +1,5 @@
 require_relative "sys/load_app"
+require          "debugger"
 
 begin
   LoadApp.new(env: "dev")

@@ -5,7 +5,7 @@ require_relative 'event_emitter'
 # new messages.
 #
 # Examples
-#   updater = MailUpdater.new(:logging => true)
+#   updater = MailUpdater.new
 #   updater.add_mail_source OfflineImapSource.new
 #   updater.process
 class MailUpdater < EventEmitter
@@ -28,12 +28,20 @@ class MailUpdater < EventEmitter
     @sources << source
   end
 
-  # Public:
+  # Public: process mail sources and emit events to the listeners
+  #   Events
+  #     after_check:   runs after mail check is complete
+  #     before_filter: runs after the mail check, but before messages are
+  #                    filtered out by the @ignore_pattern instance variable
+  #     new_mail:      runs after mail check is complete but only if there are
+  #                    new messages.
   def process
     # Call each source and collect the messages
     messages = @sources.inject([]){ |a, e| e.call }.flatten
 
-    # Reduce the new message list by filtering out by a regex pattern
+    emit(:before_filter, :messages => messages.flatten)
+
+    # filter out messages we don't want to process
     messages = messages.select{ |m| m !~ @ignore_pattern }
 
     after_check_events messages
