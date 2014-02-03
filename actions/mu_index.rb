@@ -1,23 +1,15 @@
+# Public: Update the mu index.
+# This class is a wrapper for the ShellCommand.update_mu_index call. It conforms to the expected
+# interface of a mail action, so we can register it with the MailUpdater class
 class MuIndex
-  def call(options={})
-    options = { :messages => [] }.update(options)
-    puts "Updating mu index"
+  attr_accessor :shell
 
-    kill_mu
-    puts `/usr/local/bin/mu index --maildir=/home/choltz/Maildir`
-    # kill the mu process again, otherwise the lock can prevent mu4e
-    # from showing mail
-    kill_mu
-
-    puts "index update complete"
+  def initialize
+    @shell = ShellCommand.new
   end
 
-  private
-
-  # Internal: Kill off the mu process. We won't be able to run the indexer
-  # if mu is already running
-  def kill_mu
-    `pgrep -f '/mu server'`.split("\n").each{ |p| `kill -9 #{p}` }
-    `sleep 2`
+  def call(options={})
+    puts "Updateing MU Index"
+    @shell.update_mu_index
   end
 end

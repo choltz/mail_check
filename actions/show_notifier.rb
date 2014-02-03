@@ -1,9 +1,9 @@
 # Public: Display the message data in a popup notificaton
 class ShowNotifier
-  attr_accessor :prefix
+  attr_accessor :shell
 
   def initialize
-    @prefix = "DISPLAY=:0.0 XAUTHORITY=~/.Xauthority"
+    @shell = ShellCommand.new
   end
 
   # Public: Invoke this action - display message data in a notification window
@@ -11,6 +11,9 @@ class ShowNotifier
   #    messages - array of message data.
   def call(options={})
     options = { :messages => [] }.update(options)
-    Kernel.system "#{@prefix} notify-send 'New Mail' 'You have #{options[:messages].length} unread messages.\nDebug: #{options[:messages]}' -t 4000"
+
+    if options[:messages].length > 0
+      @shell.show_notification "New Mail", "You have #{options[:messages].length} unread messages.\nDebug: #{options[:messages]}"
+    end
   end
 end
