@@ -5,7 +5,7 @@ describe ShowNotifier do
     action   = ShowNotifier.new
     messages = ["buh1", "buh2"]
 
-    Kernel.should_receive(:system).with("#{action.prefix} notify-send 'New Mail' 'You have #{messages.length} unread messages.\nDebug: #{messages}' -t 4000")
+    expect(Kernel).to receive(:system).with("#{action.prefix} notify-send 'New Mail' 'You have #{messages.length} unread messages.\nDebug: #{messages}' -t 4000")
     action.call :messages => messages
   end
 end

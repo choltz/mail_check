@@ -2,8 +2,8 @@ require_relative "spec_helper"
 
 describe EventEmitter do
   before(:each) do
-    @listener1 = mock("listener1")
-    @listener2 = mock("listener2")
+    @listener1 = double("listener1")
+    @listener2 = double("listener2")
     @emitter   = EventEmitter.new( :logging => true )
   end
 

@@ -7,7 +7,7 @@ describe MailUpdater do
   let(:test_listener) { TestListener.new() }
 
   it "should register listener" do
-    @listener1 = mock("listener1")
+    @listener1 = double("listener1")
     @listener1.stub(:call => true)
 
     updater.register @listener1, :event => :some_event
