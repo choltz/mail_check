@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 source "http://gems.github.com"
 
-gem "rspec"
-gem "debugger"
-gem "simplecov"
+gem "rspec",     "~>2.14"
+gem "debugger",  ">=1.6"
+gem "simplecov", ">=0.8"
