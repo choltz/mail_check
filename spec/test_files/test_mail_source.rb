@@ -1,12 +1,19 @@
 class TestMailSource
-  attr_accessor :has_been_called, :no_messages
+  attr_accessor :has_been_called,
+                :no_messages,
+                :new_messages
 
   def initialize
     @has_been_called = false
   end
 
-  def call
+  def retrieve
     @has_been_called = true
-    @no_messages == true ? [] : ["message 1", "message 2"]
+
+    if @no_messages == true
+      @new_messages = []
+    else
+      @new_messages = ["message 1", "message 2"]
+    end
   end
 end
