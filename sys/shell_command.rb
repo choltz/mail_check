@@ -4,7 +4,7 @@ class ShellCommand
 
   # Public: Retrieve messages with offlineimap
   def get_offlineimap_messages
-    Kernel.system 'offlineimap -u quiet'
+    `offlineimap -u quiet`
   end
 
   # Return the home path of the current user
@@ -26,7 +26,7 @@ class ShellCommand
 
   # Public: Kill off the offlineimap process
   def kill_offlineimap
-   `pgrep -f 'offlineimap'`.split("\n").each{ |p| `kill -9 #{p}` }
+    `pgrep -f 'offlineimap'`.split("\n").each{ |p| `kill -9 #{p}` }
   end
 
   # Public: Dispaly a popup notification with the text specified
