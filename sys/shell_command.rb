@@ -1,10 +1,25 @@
+# Public: Wrapper class to encapsulate shell operations. This way we can easily
+# stub out shell calls and set expectations in unit tests.
 class ShellCommand
+
+  # Public: Retrieve messages with offlineimap
+  def get_offlineimap_messages
+    Kernel.system 'offlineimap -u quiet'
+  end
 
   # Public: Kill off the mu process; if we don't, the mu indexer won't be able to
   # get a lock
   def kill_mu
-    `pgrep -f '/mu server'`.split("\n").each{ |p| `kill -9 #{p}` }
-    `sleep 2`
+    processes = `pgrep -f '/mu server'`.split("\n")
+    processes.each do |p|
+      Kernel.system "kill -9 #{p}"
+    end
+    Kernel.system "sleep 2"
+  end
+
+  # Public: Kill off the offlineimap process
+  def kill_offlineimap
+   `pgrep -f 'offlineimap'`.split("\n").each{ |p| `kill -9 #{p}` }
   end
 
   # Public: Dispaly a popup notification with the text specified
@@ -20,4 +35,5 @@ class ShellCommand
     Kernel.system "mu index --maildir=/home/choltz/Maildir"
     kill_mu
   end
+
 end

@@ -9,7 +9,7 @@ class MuIndex
   end
 
   def call(options={})
-    puts "Updateing MU Index"
+    puts "Updating MU Index"
     @shell.update_mu_index
   end
 end

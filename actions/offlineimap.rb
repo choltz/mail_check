@@ -1,21 +1,32 @@
 # Public: Calls offlineimap to sync up mail box
 class Offlineimap
+  attr_accessor :shell
+
+  def initialize
+    @shell = ShellCommand.new
+  end
+
+  # Public: Invoke offlineimap and return new messages
+  #
+  # Returns: an array of new message file paths
   def call
-    puts '*** starting offline imap synchronization'
     old_messages = messages
 
-    # Kill existing offlineimap process and start a new one
-    puts `pgrep -f 'offlineimap'`.split("\n").each{ |p| `kill -9 #{p}` }
-    system 'offlineimap -u quiet' # `offlineimap -u quiet`
-    new_messages = messages
-    puts '*** imap synchronization complete'
+    @shell.kill_offlineimap
+    @shell.get_offlineimap_messages
 
-    new_messages - old_messages
+    messages - old_messages
+  end
+
+  private
+
+  def home_path
+    ENV["HOME"]
   end
 
   # Internal: Retrieve message file names
   def messages
-    Dir["#{ENV["HOME"]}/Maildir/*/*/*"]
+    Dir["{home_path}/Maildir/*/*/*"]
   end
 
 end
