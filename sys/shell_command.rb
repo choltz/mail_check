@@ -7,6 +7,13 @@ class ShellCommand
     Kernel.system 'offlineimap -u quiet'
   end
 
+  # Return the home path of the current user
+  def home_path
+    # OK, technically this isn't a shell command, though it could have been coded
+    # as `echo $HOME`
+    ENV["HOME"]
+  end
+
   # Public: Kill off the mu process; if we don't, the mu indexer won't be able to
   # get a lock
   def kill_mu
