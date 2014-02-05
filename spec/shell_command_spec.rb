@@ -40,4 +40,8 @@ describe ShellCommand do
     shell.update_mu_index
   end
 
+  it "plays a sound file" do
+    shell.should_receive(:'`').with("mpg123 --quiet test.mp3")
+    shell.play_sound("test.mp3")
+  end
 end

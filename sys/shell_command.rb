@@ -25,6 +25,11 @@ class ShellCommand
     `killall -9 offlineimap`
   end
 
+  # Public: Play a sound file
+  def play_sound(file)
+    `mpg123 --quiet #{file}`
+  end
+
   # Public: Dispaly a popup notification with the text specified
   def show_notification(title, text)
     prefix = "DISPLAY=:0.0 XAUTHORITY=~/.Xauthority"
