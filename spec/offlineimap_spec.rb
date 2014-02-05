@@ -11,12 +11,23 @@ describe Offlineimap do
   end
 
   it "returns all new messages as an array of message file paths" do
-#    expect(offlineimap.shell).to receive(:kill_offlineimap)
-#
-#    offlineimap.shell.stub(:get_offlineimap_messages) { "" }
+    offlineimap.shell.stub(:get_offlineimap_messages)
+    offlineimap.shell.stub(:kill_offlineimap)
+    offlineimap.stub(:messages) { ["message 2"] }
+
+    offlineimap.old_messages = ["message 1"]
+    offlineimap.retrieve
+
+    expect(offlineimap.new_messages).to eq ["message 2"]
   end
 
   it "returns an empty array if there are no new messages" do
+    offlineimap.shell.stub(:get_offlineimap_messages)
+    offlineimap.shell.stub(:kill_offlineimap)
 
+    offlineimap.new_messages = []
+    offlineimap.retrieve
+
+    expect(offlineimap.new_messages).to eq []
   end
 end

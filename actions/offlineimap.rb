@@ -2,6 +2,7 @@
 class Offlineimap
   attr_accessor :shell
   attr_accessor :new_messages
+  attr_accessor :old_messages
 
   def initialize
     @shell        = ShellCommand.new
@@ -9,8 +10,6 @@ class Offlineimap
   end
 
   # Public: Invoke offlineimap and return new messages
-  #
-  # Returns: an array of new message file paths
   def retrieve
     @shell.kill_offlineimap
     @shell.get_offlineimap_messages
