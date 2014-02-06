@@ -3,7 +3,7 @@ require_relative "spec_helper"
 describe PlaySound do
   it "has a default sound file" do
     action = PlaySound.new
-    action.sound_file.should eq "~/scripts/mail/harp.mp3"
+    expect(action.sound_file).to eq "~/scripts/mail/harp.mp3"
   end
 
   it "plays a sound file when called" do

@@ -8,7 +8,7 @@ describe ShellCommand do
   let(:shell) { ShellCommand.new }
 
   it "calls offlineimap to retrieve messages" do
-    shell.should_receive(:'`').with("offlineimap -u quiet")
+    expect(shell).to receive(:'`').with("offlineimap -u quiet")
     shell.get_offlineimap_messages
   end
 
@@ -17,12 +17,12 @@ describe ShellCommand do
   end
 
   it "kills the mu process" do
-    shell.should_receive(:'`').with("killall -9 mu")
+    expect(shell).to receive(:'`').with("killall -9 mu")
     shell.kill_mu
   end
 
   it "kills the offlineimap process" do
-    shell.should_receive(:'`').with("killall -9 offlineimap")
+    expect(shell).to receive(:'`').with("killall -9 offlineimap")
     shell.kill_offlineimap
   end
 
@@ -30,18 +30,18 @@ describe ShellCommand do
     title = "this is the title"
     text  = "this is the text"
 
-    shell.should_receive(:'`').with("DISPLAY=:0.0 XAUTHORITY=~/.Xauthority notify-send '#{title}' '#{text}' -t 4000")
+    expect(shell).to receive(:'`').with("DISPLAY=:0.0 XAUTHORITY=~/.Xauthority notify-send '#{title}' '#{text}' -t 4000")
     shell.show_notification title, text
   end
 
   it "updates the mu index" do
     shell.stub(:kill_mu) { nil }
-    shell.should_receive(:'`').with("mu index --maildir=#{shell.home_path}/Maildir")
+    expect(shell).to receive(:'`').with("mu index --maildir=#{shell.home_path}/Maildir")
     shell.update_mu_index
   end
 
   it "plays a sound file" do
-    shell.should_receive(:'`').with("mpg123 --quiet test.mp3")
+    expect(shell).to receive(:'`').with("mpg123 --quiet test.mp3")
     shell.play_sound("test.mp3")
   end
 end

@@ -11,7 +11,7 @@ describe EventEmitter do
     @emitter.register @listener1, :event => :buh
     @emitter.register @listener2, :event => :buh
 
-    @emitter.listeners[:buh].length.should eq(2)
+    expect(@emitter.listeners[:buh].length).to be 2
   end
 
   it "should emit events" do
@@ -21,7 +21,7 @@ describe EventEmitter do
     @emitter.register @listener2, :event => :buh
     @emitter.emit(:buh, :x => 1, :y => 2)
 
-    @emitter.history.length.should eq(2)
+    expect(@emitter.history.length).to be 2
   end
 
   it "should allow the listener to listen to specific events" do
@@ -33,6 +33,6 @@ describe EventEmitter do
     @emitter.emit(:buh1)
     @emitter.emit(:buh2)
 
-    @emitter.history.length.should eq(1)
+    expect(@emitter.history.length).to be 1
   end
 end
