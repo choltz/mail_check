@@ -5,19 +5,19 @@ class EventEmitter
   attr_accessor :history
 
   # Public: constructor
-  def initialize(options={})
-    @logging       = options[:logging] == true
+  def initialize(logging: true)
+    @logging       = logging
     @listeners     = {}
     @history       = []
   end
 
   # raise an event to all listeners
-  def emit(event, options={})
+  def emit(event, **options)
     return if !@listeners.has_key?(event)
 
     @listeners[event].each do |listener|
-      listener.call(options)
-      @history << [event, options] if @logging == true
+      listener.call(**options)
+      @history << [event, **options] if @logging == true
     end
   end
 
@@ -26,9 +26,8 @@ class EventEmitter
   # listener - object that will listen for emitted events
   # options:
   #   event  - the event that the listener will listen for
-  #   method - the method to call when the event is rasied
-  def register(listener, options={})
-    options = { :event => :none, :method => :call }.update(options)
-    (@listeners[options[:event]] ||= []) << listener
+  #   method - the method to call when the event is raised
+  def register(listener, event: :none, method: :call)
+    (@listeners[event] ||= []) << listener
   end
 end

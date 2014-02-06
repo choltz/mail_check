@@ -10,7 +10,7 @@ class MessageLogger
 
   # Public: invoke the message logger
   #   options: hash of key value pairs to write to the log file
-  def call(options={})
-    @logger.debug(options[:messages])
+  def call(messages: [])
+    @logger.debug(messages)
   end
 end

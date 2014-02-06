@@ -17,10 +17,10 @@ class MailUpdater < EventEmitter
   attr_accessor :logger
 
   # Public: constructor
-  def initialize(options = {})
+  def initialize(**options)
     @sources = []
     @logger  = NoLogger.new
-    super(options)
+    super(**options)
   end
 
   # Public: Add a mail source to process
@@ -42,23 +42,23 @@ class MailUpdater < EventEmitter
       array << source.new_messages
     end.flatten
 
-    emit(:before_filter, :messages => messages.flatten)
+    emit(:before_filter, :messages => messages)
 
     # filter out messages we don't want to process
-    messages = messages.select{ |m| m !~ @ignore_pattern }
+    messages.select!{ |message| message !~ @ignore_pattern }
 
     after_check_events messages
-  rescue Exception => e
-    @logger.error e.message
-    @logger.error e.backtrace.join("\n")
+  rescue Exception => exception
+    @logger.error exception.message
+    @logger.error exception.backtrace.join("\n")
   end
 
   private
 
   # Internal: Raise events to subscribers
   def after_check_events(messages)
-    emit(:after_check, :messages => messages.flatten)
-    emit(:new_mail,    :messages => messages.flatten) if !messages.empty?
+    emit(:after_check, :messages => messages)
+    emit(:new_mail,    :messages => messages) if !messages.empty?
   end
 
 end

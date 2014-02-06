@@ -9,11 +9,9 @@ class ShowNotifier
   # Public: Invoke this action - display message data in a notification window
   #  options:
   #    messages - array of message data.
-  def call(options={})
-    options = { :messages => [] }.update(options)
-
-    if options[:messages].length > 0
-      @shell.show_notification "New Mail", "You have #{options[:messages].length} unread messages.\nDebug: #{options[:messages]}"
+  def call(messages: [])
+    if messages.length > 0
+      @shell.show_notification "New Mail", "You have #{messages.length} unread messages.\nDebug: #{messages}"
     end
   end
 end

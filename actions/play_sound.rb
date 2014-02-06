@@ -9,7 +9,7 @@ class PlaySound
   end
 
   # Public: Play a sound file
-  def call(options={})
+  def call(messages: [])
     @shell.play_sound(@sound_file)
   end
 end

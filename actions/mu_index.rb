@@ -8,7 +8,7 @@ class MuIndex
     @shell = ShellCommand.new
   end
 
-  def call(options={})
+  def call(messages: [])
     @shell.update_mu_index
   end
 end
