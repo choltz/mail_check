@@ -37,14 +37,10 @@ class MailUpdater < EventEmitter
   #                    new messages.
   def process
     # Call each source and collect the messages
-    # messages = @sources.inject([]){ |a, e| e.retrieve }.flatten
-    messages = []
-
-    @sources.each do |source|
+    messages = @sources.inject([]) do |array, source|
       source.retrieve
-      messages << source.new_messages
-    end
-    messages.flatten!
+      array << source.new_messages
+    end.flatten
 
     emit(:before_filter, :messages => messages.flatten)
 
