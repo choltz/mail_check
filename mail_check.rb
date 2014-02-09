@@ -7,7 +7,7 @@ begin
   updater = MailUpdater.new
   updater.logger = Logger.new("log/message.log")
   updater.add_mail_source  Offlineimap.new
-  updater.ignore_pattern = /(all mail|important|trash|sent|drafts|arcana)/i
+  updater.ignore_pattern = /(all mail|important|trash|sent|drafts|arcana|spam)/i
 
   # Register listeners - these actions will take effect when new mail arrives
   updater.register MuIndex.new,       :event => :new_mail
