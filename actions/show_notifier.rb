@@ -11,7 +11,15 @@ class ShowNotifier
   #    messages - array of message data.
   def call(messages: [])
     if messages.length > 0
-      @shell.show_notification "New Mail", "You have #{messages.length} unread messages.\nDebug: #{messages}"
+      text = ""
+
+      messages.each do |message_path|
+        message = Mail.read(message_path)
+        text << "From: #{message.from.first}\n#{message.subject}\n\n"
+      end
+
+      @shell.show_notification "New Mail", text
     end
   end
+
 end

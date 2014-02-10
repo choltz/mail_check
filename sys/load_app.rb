@@ -1,6 +1,11 @@
 # Public: Require all ruby files that match the path specification
 class LoadApp
   def initialize(env: "dev")
+
+    require "rubygems"
+    require "bundler/setup"
+    require "mail"
+
     require_path "sys/*.rb"
     require_path "actions/*.rb"
 
