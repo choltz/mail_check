@@ -15,10 +15,10 @@ class ShowNotifier
 
       messages.each do |message_path|
         message = Mail.read(message_path)
-        text << "From: #{message.from.first}\n#{message.subject}\n\n"
+        text << "#{message.from.first}\n#{message.subject}\n\n"
       end
 
-      @shell.show_notification "New Mail", text
+      @shell.show_notification "New Mail\n", text
     end
   end
 
