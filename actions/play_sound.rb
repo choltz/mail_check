@@ -4,7 +4,7 @@ class PlaySound
   attr_accessor :sound_file
 
   def initialize
-    @sound_file = "~/scripts/mail/harp.mp3"
+    @sound_file = '~/scripts/mail/harp.mp3'
     @shell      = ShellCommand.new
   end
 

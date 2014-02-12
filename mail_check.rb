@@ -1,11 +1,11 @@
-require_relative "sys/load_app"
+require_relative 'sys/load_app'
 
 begin
-  LoadApp.new(env: "dev")
+  LoadApp.new(env: 'dev')
 
   # Create a mail updated and add a mail source
   updater = MailUpdater.new
-  updater.logger = Logger.new("log/message.log")
+  updater.logger = Logger.new('log/message.log')
   updater.add_mail_source  Offlineimap.new
   updater.ignore_pattern = /(all mail|important|trash|sent|drafts|arcana|spam)/i
 

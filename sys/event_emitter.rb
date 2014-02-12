@@ -13,7 +13,7 @@ class EventEmitter
 
   # raise an event to all listeners
   def emit(event, **options)
-    return if !@listeners.has_key?(event)
+    return if !@listeners.key?(event)
 
     @listeners[event].each do |listener|
       listener.call(**options)

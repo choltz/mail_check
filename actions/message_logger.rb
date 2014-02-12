@@ -5,7 +5,7 @@ class MessageLogger
   attr_accessor :logger
 
   def initialize
-    @logger = Logger.new("log/message.log")
+    @logger = Logger.new('log/message.log')
   end
 
   # Public: invoke the message logger

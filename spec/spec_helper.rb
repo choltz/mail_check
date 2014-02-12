@@ -1,8 +1,8 @@
-require "simplecov"
+require 'simplecov'
 SimpleCov.start
-require_relative "../sys/load_app.rb"
+require_relative '../sys/load_app.rb'
 
-LoadApp.new(env: "test")
+LoadApp.new(env: 'test')
 
 RSpec.configure do |config|
   config.color_enabled = true

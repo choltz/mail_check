@@ -11,7 +11,7 @@ class ShowNotifier
   #    messages - array of message data.
   def call(messages: [])
     if messages.length > 0
-      text = ""
+      text = ''
 
       messages.each do |message_path|
         message = Mail.read(message_path)
@@ -21,5 +21,4 @@ class ShowNotifier
       @shell.show_notification "New Mail\n", text
     end
   end
-
 end

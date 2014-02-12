@@ -12,7 +12,7 @@ class Offlineimap
   # Public: Invoke offlineimap and return new messages
   def retrieve
     @shell.kill_offlineimap
-    @shell.get_offlineimap_messages
+    @shell.offlineimap_messages
     @new_messages = messages - @old_messages
   end
 

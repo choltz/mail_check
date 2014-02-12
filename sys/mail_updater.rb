@@ -37,7 +37,7 @@ class MailUpdater < EventEmitter
   #                    new messages.
   def process
     # Call each source and collect the messages
-    messages = @sources.inject([]) do |array, source|
+    messages = @sources.reduce([]) do |array, source|
       source.retrieve
       array << source.new_messages
     end.flatten
@@ -45,7 +45,7 @@ class MailUpdater < EventEmitter
     emit(:before_filter, :messages => messages)
 
     # filter out messages we don't want to process
-    messages.select!{ |message| message !~ @ignore_pattern }
+    messages.select! { |message| message !~ @ignore_pattern }
 
     after_check_events messages
   rescue Exception => exception
@@ -60,5 +60,4 @@ class MailUpdater < EventEmitter
     emit(:after_check, :messages => messages)
     emit(:new_mail,    :messages => messages) if !messages.empty?
   end
-
 end
