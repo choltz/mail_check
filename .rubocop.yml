@@ -12,20 +12,8 @@ LineLength:
   Enabled: true
   Max: 100
 
-#RedundantReturn:
-#  Enabled: false
-
 RescueException:
   Enabled: false
 
 SpaceAroundBraces:
   Enabled: false
-
-#SpaceAroundEqualsInParameterDefault:
-#  Enabled: false
-
-#SpaceInsideParens:
-#  Enabled: false
-
-#StringLiterals:
-#  Enabled: false
