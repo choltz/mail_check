@@ -7,5 +7,8 @@ The primary motivation behind this project was to become more familiar with publ
 
 The project folder structure is fairly simple:
 
-  actions
-  Contains all subscriber classes. The MailUpdater class publishes a message to these classes when new mail arrives.
+* actions -  Contains all subscriber classes. The MailUpdater class publishes a message to these classes when new mail arrives
+* bin - Contains a shell script that invokes the mail_check app
+* log - Dumping ground for log files. The app logs to log/message.log
+* spec - rspec tests
+* sys - system files, such as shell commands, event emitter code, etc.
