@@ -24,14 +24,14 @@ At this point, the mail check app has only been tested on Ubuntu Linux. However,
 * mpg123
 * notify-send
 
-### Mac Users
+## Mac Users
 As is, this won't work on OS X, but it is very close. The dependencies are likely available through Home brew, but the popup notifier currently uses notify-send, where it would need to make calls to Growl instead.
 
 ## Ruby configuration
 It's desirable to keep your ruby gems isolated. Though not required, I encourage you to use a tool such as rvm or rbenv/shimes to keep your gems for this app separate from your other ruby apps. From the mail_check, folder, run bundle install to install the gems required for this app.
 
 ## Offlineimap configuration
-This is documented extensively elsewhere. The Arch wiki has [comprehensive details(https://wiki.archlinux.org/index.php/OfflineIMAP)].
+This is documented extensively elsewhere. The Arch wiki has [comprehensive details](https://wiki.archlinux.org/index.php/OfflineIMAP).
 
 ## Cron
 This app is designed to run at regular intervals. There is a convenience shell script in the bin folder that can be hooked into the cron file like this:
