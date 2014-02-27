@@ -3,7 +3,8 @@ class LoadApp
   def initialize(env: 'dev')
     require 'rubygems'
     require 'bundler/setup'
-    require 'mail'
+
+    Bundler.require(:default)
 
     require_path 'sys/*.rb'
     require_path 'actions/*.rb'

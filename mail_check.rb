@@ -4,10 +4,10 @@ begin
   LoadApp.new(env: 'dev')
 
   # Create a mail updated and add a mail source
-  updater = MailUpdater.new
-  updater.logger = Logger.new('log/message.log')
+  updater                = MailUpdater.new
+  updater.logger         = Logger.new('log/message.log')
+  updater.ignore_pattern = /(all mail|important|trash|sent|drafts|arcana|spam|response code alert)/i
   updater.add_mail_source  Offlineimap.new
-  updater.ignore_pattern = /(all mail|important|trash|sent|drafts|arcana|spam)/i
 
   # Register listeners - these actions will take effect when new mail arrives
   updater.register MuIndex.new,       :event => :new_mail
