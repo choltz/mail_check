@@ -35,22 +35,15 @@ class MailUpdater < EventEmitter
     mail_source.fetch
     messages = mail_source.new_messages
 
-    emit(:before_filter, :messages => messages)
+    emit :before_filter, :messages => messages
 
     # filter out messages we don't want to process
     messages.select! { |message| message !~ @ignore_pattern }
 
-    after_check_events messages
+    emit :after_check, :messages => messages
+    emit :new_mail,    :messages => messages if !messages.empty?
   rescue Exception => exception
     @logger.error exception.message
     @logger.error exception.backtrace.join("\n")
-  end
-
-  private
-
-  # Internal: Raise events to subscribers
-  def after_check_events(messages)
-    emit(:after_check, :messages => messages)
-    emit(:new_mail,    :messages => messages) if !messages.empty?
   end
 end
