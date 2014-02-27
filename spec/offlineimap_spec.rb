@@ -7,7 +7,7 @@ describe Offlineimap do
     expect(offlineimap.shell).to receive(:kill_offlineimap)
     expect(offlineimap.shell).to receive(:offlineimap_messages)
 
-    offlineimap.retrieve
+    offlineimap.fetch
   end
 
   it 'returns all new messages as an array of message file paths' do
@@ -16,7 +16,7 @@ describe Offlineimap do
     offlineimap.stub(:messages) { ['message 2'] }
 
     offlineimap.old_messages = ['message 1']
-    offlineimap.retrieve
+    offlineimap.fetch
 
     expect(offlineimap.new_messages).to eq ['message 2']
   end
@@ -26,7 +26,7 @@ describe Offlineimap do
     offlineimap.shell.stub(:kill_offlineimap)
 
     offlineimap.new_messages = []
-    offlineimap.retrieve
+    offlineimap.fetch
 
     expect(offlineimap.new_messages).to eq []
   end

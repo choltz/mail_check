@@ -7,7 +7,7 @@ class TestMailSource
     @has_been_called = false
   end
 
-  def retrieve
+  def fetch
     @has_been_called = true
 
     if @no_messages == true

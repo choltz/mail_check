@@ -16,13 +16,8 @@ describe MailUpdater do
     expect(updater.listeners[:some_event].length).to be 1
   end
 
-  it 'should add sources' do
-    updater.add_mail_source test_source
-    expect(updater.sources.length).to be 1
-  end
-
   it 'should log processed events' do
-    updater.add_mail_source test_source
+    updater.mail_source = test_source
     updater.register test_listener, :event => :new_mail
     updater.process
 
@@ -32,7 +27,7 @@ describe MailUpdater do
   end
 
   it 'should process registered listeners' do
-    updater.add_mail_source test_source
+    updater.mail_source = test_source
     updater.register test_listener, :event => :new_mail
     updater.process
 
@@ -42,7 +37,7 @@ describe MailUpdater do
 
   it 'should not emit events if there are no new messages' do
     test_source.no_messages = true
-    updater.add_mail_source test_source
+    updater.mail_source = test_source
     updater.register test_listener, :event => :new_mail
     updater.process
 
@@ -64,7 +59,7 @@ describe MailUpdater do
   end
 
   it 'filters out messages that match the pattern specicied' do
-    updater.add_mail_source test_source
+    updater.mail_source = test_source
     updater.register test_listener, :event => :new_mail
     updater.ignore_pattern = /message 1/
     updater.process
