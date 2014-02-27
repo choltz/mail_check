@@ -1,6 +1,6 @@
-require_relative 'sys/load_app'
-
 begin
+  require_relative 'sys/load_app'
+
   LoadApp.new(env: 'dev')
 
   # Create a mail updated and add a mail source
