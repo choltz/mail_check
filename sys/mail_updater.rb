@@ -12,20 +12,16 @@ class MailUpdater < EventEmitter
   # Note: it would be better to compose with an event emitter class than
   # to inherit from it...
 
-  attr_accessor :sources
   attr_accessor :ignore_pattern
   attr_accessor :logger
+  attr_accessor :mail_source
+  attr_accessor :sources
 
   # Public: constructor
   def initialize(**options)
     @sources = []
     @logger  = NoLogger.new
     super(**options)
-  end
-
-  # Public: Add a mail source to process
-  def add_mail_source(source)
-    @sources << source
   end
 
   # Public: process mail sources and emit events to the listeners
@@ -36,11 +32,8 @@ class MailUpdater < EventEmitter
   #     new_mail:      runs after mail check is complete but only if there are
   #                    new messages.
   def process
-    # Call each source and collect the messages
-    messages = @sources.reduce([]) do |array, source|
-      source.retrieve
-      array << source.new_messages
-    end.flatten
+    mail_source.fetch
+    messages = mail_source.new_messages
 
     emit(:before_filter, :messages => messages)
 
