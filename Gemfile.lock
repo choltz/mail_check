@@ -1,15 +1,12 @@
 GEM
   remote: http://rubygems.org/
-  remote: http://gems.github.com/
   specs:
     ast (1.1.0)
-    columnize (0.3.6)
-    debugger (1.6.5)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.3.1)
+    byebug (3.2.0)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+    columnize (0.9.0)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.1)
     diff-lcs (1.2.5)
     docile (1.1.2)
     json (1.8.1)
@@ -51,7 +48,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  debugger (>= 1.6.5)
+  byebug
   mail (~> 2.5.4)
   rspec (~> 2.14)
   rubocop
